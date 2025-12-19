@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e6d9ff, #f5e6ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 320px;
+      box-shadow: 0 4px 12px rgba(120, 0, 200, 0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #6a0dad;
+    }
+
+    label {
+      font-size: 14px;
+      color: #4b0082;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      border: 1px solid #cbb3ff;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      background: #6a0dad;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button:hover {
+      background: #7b2cbf;
+    }
+
+    .success {
+      margin-top: 10px;
+      text-align: center;
+      color: green;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h2>Contact Form</h2>
+
+    <form id="contact-form">
+      <label>Full Name</label>
+      <input type="text" name="name" required>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Phone</label>
+      <input type="tel" name="phone" required>
+
+      <label>Message</label>
+      <textarea name="message" rows="4" required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+
+    <div class="success" id="success-message">
+      Message sent successfully ✔
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      emailjs.init(xt-YSTjig0Qte6EWn);
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      emailjs.sendForm(
+        service_8j6jmjj,
+        template_dygfr18,
+        this
+      ).then(function() {
+        document.getElementById("success-message").style.display = "block";
+      }, function(error) {
+        alert("Error sending message");
+        console.error(error);
+      });
+    });
+  </script>
+
+</body>
+</html>
