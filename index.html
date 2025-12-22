@@ -21,7 +21,7 @@
       background: #ffffff;
       padding: 25px;
       border-radius: 12px;
-      width: 320px;
+      width: 340px;
       box-shadow: 0 4px 12px rgba(120, 0, 200, 0.2);
     }
 
@@ -75,15 +75,17 @@
     .success-message button {
       margin-top: 15px;
       padding: 10px 16px;
-      background-color: #7c3aed;
-      color: white;
-      border: none;
+      background-color: transparent;
+      color: #6a0dad;
+      border: 2px solid #6a0dad;
       border-radius: 6px;
       cursor: pointer;
+      font-weight: bold;
     }
 
     .success-message button:hover {
-      background-color: #6d28d9;
+      background-color: #6a0dad;
+      color: white;
     }
   </style>
 </head>
@@ -114,7 +116,7 @@
       <p>Thank you! We will contact you soon.</p>
 
       <button type="button" id="sendAnotherBtn">
-        Send another form
+        Do you want to send another form?
       </button>
     </div>
   </div>
@@ -135,13 +137,16 @@
         "service_8j6jmjj",
         "template_dygfr18",
         this
-      ).then(function () {
-        form.classList.add("hidden");
-        successMessage.classList.remove("hidden");
-      }, function (error) {
-        alert("Error sending message");
-        console.error(error);
-      });
+      ).then(
+        function () {
+          form.classList.add("hidden");
+          successMessage.classList.remove("hidden");
+        },
+        function (error) {
+          alert("Error sending message");
+          console.error(error);
+        }
+      );
     });
 
     sendAnotherBtn.addEventListener("click", function () {
