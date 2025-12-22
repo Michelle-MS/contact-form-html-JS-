@@ -59,11 +59,31 @@
       background: #7b2cbf;
     }
 
-    .success {
-      margin-top: 10px;
-      text-align: center;
-      color: green;
+    .hidden {
       display: none;
+    }
+
+    .success-message {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f3e8ff;
+      color: #4c1d95;
+      text-align: center;
+    }
+
+    .success-message button {
+      margin-top: 15px;
+      padding: 10px 16px;
+      background-color: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .success-message button:hover {
+      background-color: #6d28d9;
     }
   </style>
 </head>
@@ -89,29 +109,45 @@
       <button type="submit">Send</button>
     </form>
 
-    <div class="success" id="success-message">
-      Message sent successfully ✔
+    <div id="successMessage" class="success-message hidden">
+      <h3>✅ Your form was sent successfully</h3>
+      <p>Thank you! We will contact you soon.</p>
+
+      <button type="button" id="sendAnotherBtn">
+        Send another form
+      </button>
     </div>
   </div>
 
   <script>
-    (function() {
+    (function () {
       emailjs.init("xt-YSTjig0Qte6EWn");
     })();
 
-    document.getElementById("contact-form").addEventListener("submit", function(event) {
+    const form = document.getElementById("contact-form");
+    const successMessage = document.getElementById("successMessage");
+    const sendAnotherBtn = document.getElementById("sendAnotherBtn");
+
+    form.addEventListener("submit", function (event) {
       event.preventDefault();
 
       emailjs.sendForm(
         "service_8j6jmjj",
         "template_dygfr18",
         this
-      ).then(function() {
-        document.getElementById("success-message").style.display = "block";
-      }, function(error) {
+      ).then(function () {
+        form.classList.add("hidden");
+        successMessage.classList.remove("hidden");
+      }, function (error) {
         alert("Error sending message");
         console.error(error);
       });
+    });
+
+    sendAnotherBtn.addEventListener("click", function () {
+      form.reset();
+      form.classList.remove("hidden");
+      successMessage.classList.add("hidden");
     });
   </script>
 
